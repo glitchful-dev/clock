@@ -2,12 +2,17 @@
 
 A clock. One HTML file, no dependencies, no network, no build.
 
-Open `public/index.html`.
+Open `public/index.html`, or run it the way it is served in production:
 
-Deployed as an OCI image: a push to `main` builds `ghcr.io/glitchful-dev/site-clock`
-via the shared workflow in `glitchful-dev/home-lab`, and the cluster pulls it by
-digest. Nothing here knows about the cluster; the cluster does not know this repo
-exists. They meet at one `@sha256:` string in an infra-repo PR.
+```
+docker build -t clock . && docker run --rm -p 8080:8080 clock
+```
+
+Deployed as an OCI image: a push to `main` builds this repo's `Dockerfile`, with
+this repo as the build context, through the shared workflow in
+`glitchful-dev/home-lab`, and pushes `ghcr.io/glitchful-dev/site-clock`, which the
+cluster pulls by digest. Nothing here knows about the cluster; the cluster does not
+know this repo exists. They meet at one `@sha256:` string in an infra-repo PR.
 
 ## Use
 
