@@ -6,7 +6,8 @@ COPY public/ ./dist/
 
 RUN find dist -type f \
       -regex '.*\.\(html\|js\|mjs\|css\|svg\|json\|txt\|xml\|webmanifest\)' \
-      -exec sh -c 'gzip -9 -k "$1"; brotli -q 11 -k "$1"' _ {} \;
+      -print0 \
+    | xargs -0 -n1 sh -c 'gzip -9 -k "$1" && brotli -q 11 -k "$1"' _
 
 # epoch mtimes keep the /public layer digest identical for identical content
 RUN find dist -exec touch -d @0 {} +
