@@ -2,7 +2,12 @@
 
 A clock. One HTML file, no dependencies, no network, no build.
 
-Open `index.html`.
+Open `public/index.html`.
+
+Deployed as an OCI image: a push to `main` builds `ghcr.io/glitchful-dev/site-clock`
+via the shared workflow in `glitchful-dev/home-lab`, and the cluster pulls it by
+digest. Nothing here knows about the cluster; the cluster does not know this repo
+exists. They meet at one `@sha256:` string in an infra-repo PR.
 
 ## Use
 

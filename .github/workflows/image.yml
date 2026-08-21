@@ -1,0 +1,25 @@
+# Build this site into an OCI image and push it to GHCR.
+#
+# All the actual work lives once, in glitchful-dev/home-lab (Spec 2 §3.5), so
+# this repo contains no Dockerfile, no build config and no Rust. It stays five
+# lines however the pipeline evolves.
+#
+# `permissions` is NOT optional and cannot be inherited: packages:write is what
+# lets the ephemeral GITHUB_TOKEN push to ghcr.io/glitchful-dev/site-clock. No
+# PAT is involved on the build side.
+name: image
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  image:
+    uses: glitchful-dev/home-lab/.github/workflows/site-image.yml@main
+    with:
+      base: sws
+    secrets: inherit
