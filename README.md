@@ -8,11 +8,9 @@ Open `public/index.html`, or run it the way it is served in production:
 docker build -t clock . && docker run --rm -p 8080:8080 clock
 ```
 
-Deployed as an OCI image: a push to `main` builds this repo's `Dockerfile`, with
-this repo as the build context, through the shared workflow in
-`glitchful-dev/home-lab`, and pushes `ghcr.io/glitchful-dev/site-clock`, which the
-cluster pulls by digest. Nothing here knows about the cluster; the cluster does not
-know this repo exists. They meet at one `@sha256:` string in an infra-repo PR.
+Deployed as an OCI image: a push to `main` builds this repo's `Dockerfile` and pushes
+`ghcr.io/glitchful-dev/site-clock`. The run summary prints the reference, which
+`glitchful-dev/home-lab` pins to deploy it. Nothing here knows about the cluster.
 
 ## Use
 
