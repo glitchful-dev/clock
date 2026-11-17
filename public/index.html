@@ -41,12 +41,12 @@
     line-height: 1;
     cursor: pointer;
   }
+  /* No box around the time. Keyboard focus shows as accent-coloured digits instead. */
   #time:focus {
     outline: none;
   }
   #time:focus-visible {
-    outline: var(--ds-focus-ring-width) solid var(--ds-focus-ring);
-    outline-offset: var(--ds-space-2);
+    color: var(--ds-accent-fg);
   }
   @media (prefers-reduced-motion: reduce) {
     body {
